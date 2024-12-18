@@ -1,36 +1,14 @@
-import React, { useState, useContext } from "react";
-// import WebcamCapture from "../WebcamCapture";
-import FaceRecognition from "../FaceAuth";
-import { AuthContext } from "../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { SignInButton } from "@clerk/clerk-react";
 
-const LoginPage = () => {
-  const { login } = useContext(AuthContext);
-  const [verified, setVerified] = useState(false);
-  const navigate = useNavigate();
-
-  const handleFaceDetected = (isDetected) => {
-    setVerified(isDetected);
-  };
-
-  const handleLogin = () => {
-    if (verified) {
-      login({ name: "Employee" });
-      navigate("/dashboard");
-    } else {
-      alert("Face not recognized. Please try again.");
-    }
-  };
-
+function Login() {
   return (
-    <div >
-      <h2>Login with Facial Recognition</h2>
-      <FaceRecognition onFaceDetected={handleFaceDetected} />
-      <button onClick={handleLogin} disabled={!verified}>
-        Login
-      </button>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="bg-black/85 h-[40%] w-[30%] flex justify-center items-center rounded-lg">
+        <SignInButton className='px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition' />
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default Login
